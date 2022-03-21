@@ -102,9 +102,18 @@ class NewMovieViewController: UITableViewController {
             
             photo.setValue(photoIcon, forKey: "image")
             photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+            
+            let delete = UIAlertAction(title: "Delete", style: .default) { _ in
+                self.movieImage.image = UIImage(named: "standart")
+            }
+            let deleteImage = UIImage(systemName: "trash")
+            delete.setValue(deleteImage, forKey: "image")
+            delete.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
 
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            
             actionSheet.addAction(photo)
+            actionSheet.addAction(delete)
             actionSheet.addAction(cancel)
             
             present(actionSheet, animated: true)
@@ -133,8 +142,7 @@ extension NewMovieViewController: UITextFieldDelegate {
 extension NewMovieViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
-
-       if UIImagePickerController.isSourceTypeAvailable(source){
+        if UIImagePickerController.isSourceTypeAvailable(source){
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
