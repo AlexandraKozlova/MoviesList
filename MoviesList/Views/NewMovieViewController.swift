@@ -28,6 +28,7 @@ class NewMovieViewController: UITableViewController {
         saveButton.isEnabled = false
         movieName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         setupEditScreen()
+        dismissKeyboard()
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -118,6 +119,12 @@ class NewMovieViewController: UITableViewController {
             
             present(actionSheet, animated: true)
         }
+    }
+    
+    private func dismissKeyboard() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 }
 
